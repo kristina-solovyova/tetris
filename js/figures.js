@@ -68,7 +68,7 @@ class Figure {
         this.topology.forEach((row, i) => {
             row.forEach((element, j) => {
                 if (element > 0) {
-                    this.playingField[this.y+i][this.x+j] = 1;
+                    this.playingField[this.y+i][this.x+j] = colors.indexOf(this.color) + 1;
                 }
             });
         });

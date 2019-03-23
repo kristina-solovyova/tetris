@@ -1,6 +1,8 @@
 const SQUARE_SIZE = 30;
 const COL_NUM = 10;
 const ROW_NUM = 20;
+const GAME_DELAY = 500;
+const MIN_DELAY = 250;
 const DEFAULT_COLOR = 'white';
 const DIRECTIONS = {
     left: {x: -1, y: 0},
@@ -26,13 +28,14 @@ class Game {
     }
 
     init() {
-        Game.drawPlayingField();
+        this.drawPlayingField();
         this.currentFigure.draw();
+        this.delay = GAME_DELAY;
     }
 
     play() {
         this.timer = setInterval(() =>
-            this.moveOn(),500
+            this.moveOn(), this.delay
         );
     }
 
@@ -45,14 +48,54 @@ class Game {
 
     nextStep() {
         this.currentFigure.occupyPlayingField();
+        this.changeScore();
         this.currentFigure = this.nextFigure;
         this.nextFigure = new Figure(this.playingField);
     }
 
-    static drawPlayingField() {
+    changeScore() {
+        let lines = this.getFullLines();
+        if (lines > 0) {
+            this.score.change(lines);
+            this.speedUpTimer();
+        }
+        console.log(JSON.stringify(this.score));
+    }
+
+    speedUpTimer() {
+        if (this.delay > MIN_DELAY) {
+            clearInterval(this.timer);
+            this.delay -= 50;
+            this.play();
+        }
+    }
+
+    getFullLines() {
+        //TODO: not all lines
+        let diffLinesNum = 0;
+        this.playingField.forEach((row, i) => {
+            let sum = row.every(elem => elem > 0);
+            if (sum) {
+                diffLinesNum ++;
+                this.eraseRow(i);
+            }
+        });
+
+        return diffLinesNum;
+    }
+
+    eraseRow(rowNum) {
+        this.playingField.splice(rowNum, 1);
+        this.playingField.unshift(new Array(COL_NUM).fill(0));
+        this.drawPlayingField();
+    }
+
+    drawPlayingField() {
         for (let i = 0; i < ROW_NUM; i++) {
             for (let j = 0; j < COL_NUM; j++) {
-                drawSquare(j, i, DEFAULT_COLOR);
+                let color = (this.playingField[i][j] > 0) ?
+                    colors[this.playingField[i][j] - 1] : DEFAULT_COLOR;
+                drawSquare(j, i, color);
             }
         }
     }

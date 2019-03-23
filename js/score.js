@@ -5,7 +5,12 @@ const POINTS = {
 class Score {
     constructor(player) {
         this.player = player;
-        this.scrore = 0;
+        this.points = 0;
         this.lines = 0;
+    }
+
+    change(lines) {
+        this.lines += lines;
+        this.points += POINTS[lines];
     }
 }
