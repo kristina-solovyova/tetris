@@ -38,6 +38,10 @@
                 <tbody></tbody>
             </table>
             <button id="export" onclick="exportRecords()">Export results</button>
+            <div class="reference">
+                <button onclick="toHomePage()">Home page</button>
+                <button onclick="location.reload()">Play again</button>
+            </div>
         </div>
     </div>
     <script src="js/figures.js"></script>
@@ -54,6 +58,10 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+        }
+        
+        function toHomePage() {
+            window.location.href = "index.html";
         }
     </script>
 </body>

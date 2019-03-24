@@ -23,7 +23,8 @@ class Score {
             lines: this.lines
         });
         this.records.sort((a, b) => b.points - a.points);
-        this.records.length = MAX_RECORDS_NUM;
+        this.records.length = (this.records.length > MAX_RECORDS_NUM) ?
+            MAX_RECORDS_NUM : this.records.length;
         this.setRecords();
         this.displayRecords();
     }
