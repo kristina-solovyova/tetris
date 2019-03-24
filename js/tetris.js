@@ -153,7 +153,7 @@ class Game {
     }
 
     handleKeydown(event) {
-        if (event.key in Object.values(ACTIONS)) {
+        if (Object.values(ACTIONS).includes(event.key)) {
             event.preventDefault();
         }
 
