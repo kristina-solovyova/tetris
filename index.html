@@ -37,11 +37,24 @@
                 </thead>
                 <tbody></tbody>
             </table>
-            <button id="export">Export results</button>
+            <button id="export" onclick="exportRecords()">Export results</button>
         </div>
     </div>
     <script src="js/figures.js"></script>
     <script src="js/score.js"></script>
     <script src="js/tetris.js"></script>
+    <script type="text/javascript">
+        function exportRecords() {
+            let file = new Blob([localStorage.getItem("records")], {type: "application/json"});
+            let a = document.createElement("a");
+            let url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = "records_table.json";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
 </body>
 </html>

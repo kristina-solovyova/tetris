@@ -23,28 +23,25 @@ const O = [[0, 0, 0, 0],
            [0, 0, 0, 0]];
 
 const topologies = {Z, S, J, T, L, I, O};
-const colors = ["red", "orange", "yellow", "green", "cyan", "blue", "darkOrchid"];
+const colors = ["#e74c3c", "#ffa726", "#ffee58", "#58d68d", "#93f3ef", "#3498db", "#9b59b6"];
 const tetraminos = assignColorsToTopologies();
-const angles = [0, 90, 180, 270];
 
 class Figure {
-    constructor(playingField, topology, color, x, y) {
+    constructor(playingField, figureContext, isNext) {
         this.playingField = playingField;
+        this.context = (figureContext == null) ? context : figureContext;
+        this.generateRandom();
 
-        if (arguments.length < 2) {
-            this.generateRandom();
-            return;
+        if (isNext === true) {
+            this.makeNext();
+        } else {
+            this.makeCurrent();
         }
-
-        this.topology = topology;
-        this.color = color;
-        this.x = x;
-        this.y = y;
     }
 
     drawElement(element, j, i, color) {
         if (element > 0) {
-            drawSquare(this.x+j, this.y+i, color);
+            drawSquare(this.x+j, this.y+i, color, this.context);
         }
     }
 
@@ -67,7 +64,7 @@ class Figure {
     occupyPlayingField() {
         this.topology.forEach((row, i) => {
             row.forEach((element, j) => {
-                if (element > 0) {
+                if (element > 0 && this.y+i >= 0) {
                     this.playingField[this.y+i][this.x+j] = colors.indexOf(this.color) + 1;
                 }
             });
@@ -118,8 +115,16 @@ class Figure {
     adjustRotation() {
         let newTopology = rotateFigure(this.topology);
         if (this.checkFieldLimitations(null, newTopology)) {
-            //TODO: починить
+            //TODO: wall kicks
             this.topology = newTopology;
+        }
+    }
+
+    getBottomColoredSquareY() {
+        for (let i = this.topology.length-1; i >= 0; i--) {
+            if (this.topology[i].some(elem => elem > 0)) {
+                return i;
+            }
         }
     }
 
@@ -127,12 +132,20 @@ class Figure {
         let tetramino = getRandomTetramino();
         this.topology = tetramino.topology;
         this.color = tetramino.color;
+    }
+
+    makeCurrent() {
         this.x = 3;
-        this.y = -2; //TODO: fix this shit!
+        this.y = -2;
+    }
+
+    makeNext() {
+        this.x = 0;
+        this.y = 0;
     }
 }
 
-function drawSquare(x, y, color) {
+function drawSquare(x, y, color, context) {
     context.fillStyle = color;
     context.fillRect(x*SQUARE_SIZE,y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE);
     context.strokeStyle = "black";
@@ -149,10 +162,6 @@ function assignColorsToTopologies() {
     });
 
     return tetraminos;
-}
-
-function getRandomAngle() {
-    return angles[Math.floor(Math.random()*angles.length)];
 }
 
 function getRandomTetramino() {
