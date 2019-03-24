@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <title>Tetris</title>
     <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript">
-        function storeUsername() {
-            let username = document.getElementById("username").value;
-            localStorage.setItem("username", username);
-        }
-    </script>
 </head>
 <body class="welcome-container">
 <div class="welcome">
@@ -21,5 +15,15 @@
         <button type="submit">Let's go!</button>
     </form>
 </div>
+
+<script type="text/javascript">
+    let username = localStorage.getItem("username");
+    document.getElementById("username").value = (username != null) ? username : null;
+
+    function storeUsername() {
+        let username = document.getElementById("username").value;
+        localStorage.setItem("username", username);
+    }
+</script>
 </body>
 </html>
