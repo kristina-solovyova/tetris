@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tetris</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1 class="title">Tetris</h1>
+    <div class="container">
+        <div class="left-menu">
+            <canvas id="next_figure" class="field" width="120" height="120">
+            </canvas>
+            <h4>Use keyboard to move figures:</h4>
+            <div class="tips">
+                <p>⮜ Left</p>
+                <p>⮞ Right</p>
+                <p>⮝ Rotate</p>
+                <p>⮟ Down</p>
+            </div>
+        </div>
+        <canvas id="main_field" class="field" width="300" height="600">
+        </canvas>
+
+        <div class="right-menu">
+            <table class="game-info">
+                <tr><th>Player:</th><td id="player"></td></tr>
+                <tr><th>Score:</th><td id="score">0</td></tr>
+            </table>
+            <table id="scores">
+                <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Points</th>
+                    <th>Lines</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button id="export" onclick="exportRecords()">Export results</button>
+            <div class="reference">
+                <button onclick="toHomePage()">Home page</button>
+                <button onclick="location.reload()">Play again</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/figures.js"></script>
+    <script src="js/score.js"></script>
+    <script src="js/tetris.js"></script>
+    <script type="text/javascript">
+        function exportRecords() {
+            let file = new Blob([localStorage.getItem("records")], {type: "application/json"});
+            let a = document.createElement("a");
+            let url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = "records_table.json";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        function toHomePage() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
