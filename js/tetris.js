@@ -158,6 +158,8 @@ class Game {
         field[1][10] = 1
         field[1][12] = 1
 
+        field[5][9] = POWER_UP;
+
         return field;
     }
 

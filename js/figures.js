@@ -24,6 +24,7 @@ const O = [[0, 0, 0, 0],
 const P = [[1]];
 
 const yellow = "#faf32f";
+const pink = "#F5A1F2";
 
 const topologies = {Z, S, J, T, L, I, O, P};
 const colors = ["#e74c3c", "#ffa726", "#ffee58", "#58d68d", "#93f3ef", "#3498db", "#9b59b6"];
@@ -109,7 +110,7 @@ class Figure {
                     return false;
                 } else if (topology[y][x] === 1 &&
                     this.playingField[newY+y] !== undefined &&
-                    this.playingField[newY+y][newX+x] > 0) {
+                    this.playingField[newY+y][newX+x] === WALL) {
                     return false;
                 }
             }
@@ -159,8 +160,42 @@ class Pacman extends Figure {
         this.lives = 3;
       }
 
+      remove_power_up() {
+        this.powered_up = false;
+        this.color = yellow;
+      }
 
       power_up() {
-        return this.present() + ', it is a ' + this.model;
+        this.powered_up = true;
+        this.color = pink;
+        this.power_up_timeout = setTimeout(() =>
+            this.remove_power_up(), 1000 * 10 // 10 secs
+        );
       }
+
+      handlePowerUp(direction, topology){
+        let newX = this.x + (direction == null ? 0 : direction.x);
+        let newY = this.y + (direction == null ? 0 : direction.y);
+
+        if (this.playingField[newY][newX] === POWER_UP) {
+            alert('Power UP!');
+            this.power_up();
+            this.erase();
+            this.draw();
+        }
+    }
+
+    move(direction) {
+        if (this.checkFieldLimitations(direction)) {
+            this.handlePowerUp();
+            this.erase();
+            this.x += direction.x;
+            this.y += direction.y;
+            this.draw();
+
+            return true;
+        }
+
+        return false;
+    }
 }
