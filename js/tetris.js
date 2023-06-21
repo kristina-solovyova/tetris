@@ -1,6 +1,6 @@
 const SQUARE_SIZE = 30;
-const COL_NUM = 20;
-const ROW_NUM = 20;
+const COL_NUM = 30;
+const ROW_NUM = 25;
 const GAME_DELAY = 500;
 const MIN_DELAY = 250;
 const DEFAULT_COLOR = 'white';
@@ -134,14 +134,27 @@ class Game {
             }
         }
     }
-
+    /*
+        0 - empty
+        1 - wall
+        2 - food
+    */
     static generatePlayingField() {
         let field = [];
         for (let i = 0; i < ROW_NUM; i++) {
             field[i] = new Array(COL_NUM).fill(0);
         }
 
-        field[10][10] = 1
+        field[0][12] = 1
+        field[1][2] = 1
+        field[1][3] = 1
+        field[1][4] = 1
+        field[1][5] = 1
+        field[1][7] = 1
+        field[1][8] = 1
+        field[1][9] = 1
+        field[1][10] = 1
+        field[1][12] = 1
 
         return field;
     }
