@@ -36,8 +36,8 @@ class Figure {
         this.topology = P;
         this.color = yellow;
         this.direction = DIRECTIONS.stop;
-        this.x = 5
-        this.y = 10
+        this.x
+        this.y 
 
         if (isNext === true) {
             this.makeNext();
@@ -106,7 +106,7 @@ class Figure {
             for (let x = 0; x < topology.length; x++) {
                 if (topology[y][x] === 1 &&
                     (newX+x < 0 || newX+x >= this.playingField[0].length
-                        || newY+y >= this.playingField.length || newY+y <= 0)) {
+                        || newY+y >= this.playingField.length || newY+y < 0)) {
                     return false;
                 } else if (topology[y][x] === 1 &&
                     this.playingField[newY+y] !== undefined &&
@@ -143,7 +143,7 @@ class Figure {
 
     makeCurrent() {
         this.x = 3;
-        this.y = -2;
+        this.y = 5;
     }
 
     makeNext() {
