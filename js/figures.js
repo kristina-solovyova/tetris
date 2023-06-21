@@ -21,8 +21,11 @@ const O = [[0, 0, 0, 0],
            [0, 1, 1, 0],
            [0, 1, 1, 0],
            [0, 0, 0, 0]];
+const P = [[1]];
 
-const topologies = {Z, S, J, T, L, I, O};
+const yellow = "#faf32f";
+
+const topologies = {Z, S, J, T, L, I, O, P};
 const colors = ["#e74c3c", "#ffa726", "#ffee58", "#58d68d", "#93f3ef", "#3498db", "#9b59b6"];
 const tetraminos = assignColorsToTopologies();
 
@@ -30,7 +33,11 @@ class Figure {
     constructor(playingField, figureContext, isNext) {
         this.playingField = playingField;
         this.context = (figureContext == null) ? context : figureContext;
-        this.generateRandom();
+        this.topology = P;
+        this.color = yellow;
+        this.direction = DIRECTIONS.stop;
+        this.x = 5
+        this.y = 10
 
         if (isNext === true) {
             this.makeNext();
@@ -99,7 +106,7 @@ class Figure {
             for (let x = 0; x < topology.length; x++) {
                 if (topology[y][x] === 1 &&
                     (newX+x < 0 || newX+x >= this.playingField[0].length
-                        || newY+y >= this.playingField.length)) {
+                        || newY+y >= this.playingField.length || newY+y <= 0)) {
                     return false;
                 } else if (topology[y][x] === 1 &&
                     this.playingField[newY+y] !== undefined &&
@@ -128,11 +135,11 @@ class Figure {
         }
     }
 
-    generateRandom() {
-        let tetramino = getRandomTetramino();
-        this.topology = tetramino.topology;
-        this.color = tetramino.color;
-    }
+    // generateRandom() {
+    //     let tetramino = getRandomTetramino();
+    //     this.topology = tetramino.topology;
+    //     this.color = tetramino.color;
+    // }
 
     makeCurrent() {
         this.x = 3;

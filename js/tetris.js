@@ -1,5 +1,5 @@
 const SQUARE_SIZE = 30;
-const COL_NUM = 10;
+const COL_NUM = 20;
 const ROW_NUM = 20;
 const GAME_DELAY = 500;
 const MIN_DELAY = 250;
@@ -8,7 +8,9 @@ const FIGURE_MAX_SIZE = 4;
 const DIRECTIONS = {
     left: {x: -1, y: 0},
     right: {x: 1, y: 0},
-    down: {x: 0, y: 1}
+    down: {x: 0, y: 1},
+    up: {x: 0, y:-1},
+    stop: {x: 0, y: 0}
 };
 const ACTIONS = {
     left: 'ArrowLeft',
@@ -26,15 +28,14 @@ class Game {
     constructor(username) {
         this.playingField = Game.generatePlayingField();
         this.currentFigure = new Figure(this.playingField, context);
-        this.nextFigure = new Figure(this.playingField, nextFigureContext, true);
         this.score = new Score(username);
     }
 
     init() {
         this.drawPlayingField();
-        this.drawNextFigureField();
+        //this.drawNextFigureField();
         this.currentFigure.draw();
-        this.nextFigure.draw();
+        //this.nextFigure.draw();
         this.score.displayRecords();
         this.delay = GAME_DELAY;
     }
@@ -54,7 +55,7 @@ class Game {
     }
 
     moveOn() {
-        let isMoved = this.currentFigure.move(DIRECTIONS.down);
+        let isMoved = this.currentFigure.move(this.currentFigure.directions);
         if (!isMoved) {
             this.nextStep();
         }
@@ -67,7 +68,7 @@ class Game {
         if (this.isOver()) {
             this.stop();
         } else {
-            this.updateFigures();
+            //this.updateFigures();
         }
     }
 
@@ -93,16 +94,15 @@ class Game {
             this.play();
         }
     }
-
+/*
     updateFigures() {
         this.nextFigure.erase();
         this.nextFigure.context = context;
         this.nextFigure.makeCurrent();
-        this.currentFigure = this.nextFigure;
         this.nextFigure = new Figure(this.playingField, nextFigureContext, true);
         this.nextFigure.draw();
     }
-
+*/
     getFullLines() {
         let fullLinesNum = 0;
         let startY = this.currentFigure.y;
@@ -141,9 +141,11 @@ class Game {
             field[i] = new Array(COL_NUM).fill(0);
         }
 
+        field[10][10] = 1
+
         return field;
     }
-
+/*
     drawNextFigureField() {
         for (let i = 0; i < FIGURE_MAX_SIZE; i++) {
             for (let j = 0; j < FIGURE_MAX_SIZE; j++) {
@@ -151,7 +153,7 @@ class Game {
             }
         }
     }
-
+*/
     handleKeydown(event) {
         if (Object.values(ACTIONS).includes(event.key)) {
             event.preventDefault();
@@ -159,16 +161,16 @@ class Game {
 
         switch (event.key) {
             case ACTIONS.left:
-                this.currentFigure.move(DIRECTIONS.left);
+                this.currentFigure.directions = DIRECTIONS.left;
                 break;
             case ACTIONS.right:
-                this.currentFigure.move(DIRECTIONS.right);
+                this.currentFigure.directions = DIRECTIONS.right;
                 break;
             case ACTIONS.down:
-                this.currentFigure.move(DIRECTIONS.down);
+                this.currentFigure.directions = DIRECTIONS.down;
                 break;
             case ACTIONS.up:
-                this.currentFigure.rotate();
+                this.currentFigure.directions = DIRECTIONS.up;
                 break;
         }
     }
