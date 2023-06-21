@@ -141,7 +141,7 @@ class Game {
     static generatePlayingField() {
         let field = [];
         for (let i = 0; i < ROW_NUM; i++) {
-            field[i] = new Array(COL_NUM).fill(0);
+            field[i] = new Array(COL_NUM).fill(2);
         }
         let i=0
         { 
@@ -666,7 +666,10 @@ class Game {
 
 
 
-        field[5][9] = POWER_UP;
+        field[3][0] = POWER_UP;
+        field[3][25] = POWER_UP;
+        field[20][0] = POWER_UP;
+        field[20][25] = POWER_UP;
 
         return field;
     }
