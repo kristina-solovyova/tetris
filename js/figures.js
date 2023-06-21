@@ -135,8 +135,8 @@ class Figure {
     }
 
     makeCurrent() {
-        this.x = 3;
-        this.y = -2;
+        this.x = 0;
+        this.y = 0;
     }
 
     makeNext() {

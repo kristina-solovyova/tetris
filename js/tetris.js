@@ -1,6 +1,6 @@
 const SQUARE_SIZE = 30;
-const COL_NUM = 10;
-const ROW_NUM = 20;
+const COL_NUM = 26;
+const ROW_NUM = 30;
 const GAME_DELAY = 500;
 const MIN_DELAY = 250;
 const DEFAULT_COLOR = 'white';
@@ -139,6 +139,358 @@ class Game {
         let field = [];
         for (let i = 0; i < ROW_NUM; i++) {
             field[i] = new Array(COL_NUM).fill(0);
+        }
+        let i=0
+        { 
+            field[i][12] = 1
+            field[i][13] = 1
+        }
+        { i=1
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+            field[i][6] = 1
+            field[i][7] = 1
+            field[i][8] = 1
+            field[i][9] = 1
+            field[i][10] = 1
+            field[i][12] = 1
+            field[i][13] = 1
+            field[i][15] = 1
+            field[i][16] = 1
+            field[i][17] = 1
+            field[i][18] = 1
+            field[i][19] = 1
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+        }
+        { i=2
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+            field[i][6] = 1
+            field[i][7] = 1
+            field[i][8] = 1
+            field[i][9] = 1
+            field[i][10] = 1
+            field[i][12] = 1
+            field[i][13] = 1
+            field[i][15] = 1
+            field[i][16] = 1
+            field[i][17] = 1
+            field[i][18] = 1
+            field[i][19] = 1
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+        }
+        { i=3
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+            field[i][6] = 1
+            field[i][7] = 1
+            field[i][8] = 1
+            field[i][9] = 1
+            field[i][10] = 1
+            field[i][12] = 1
+            field[i][13] = 1
+            field[i][15] = 1
+            field[i][16] = 1
+            field[i][17] = 1
+            field[i][18] = 1
+            field[i][19] = 1
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+        }        
+        { i=5
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+
+            field[i][6] = 1
+            field[i][7] = 1
+
+            field[i][9] = 1
+            field[i][10] = 1
+            field[i][11] = 1
+            field[i][12] = 1
+            field[i][13] = 1
+            field[i][14] = 1
+            field[i][15] = 1
+            field[i][16] = 1
+
+            field[i][18] = 1
+            field[i][19] = 1
+
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+        }
+        { i=6
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+
+            field[i][6] = 1
+            field[i][7] = 1
+
+            field[i][9] = 1
+            field[i][10] = 1
+            field[i][11] = 1
+            field[i][12] = 1
+            field[i][13] = 1
+            field[i][14] = 1
+            field[i][15] = 1
+            field[i][16] = 1
+
+            field[i][18] = 1
+            field[i][19] = 1
+
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+        }
+        { i=7
+            field[i][6] = 1
+            field[i][7] = 1
+
+            field[i][12] = 1
+            field[i][13] = 1
+
+            field[i][18] = 1
+            field[i][19] = 1
+        }
+        { i=8
+            field[i][0] = 1
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+
+            field[i][6] = 1
+            field[i][7] = 1
+            field[i][8] = 1
+            field[i][9] = 1
+            field[i][10] = 1
+
+            field[i][12] = 1
+            field[i][13] = 1
+
+            field[i][15] = 1
+            field[i][16] = 1
+            field[i][17] = 1
+            field[i][18] = 1
+            field[i][19] = 1
+
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+            field[i][25] = 1
+        }
+        { i=9
+            field[i][0] = 1
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+
+            field[i][6] = 1
+            field[i][7] = 1
+            field[i][8] = 1
+            field[i][9] = 1
+            field[i][10] = 1
+
+            field[i][12] = 1
+            field[i][13] = 1
+
+            field[i][15] = 1
+            field[i][16] = 1
+            field[i][17] = 1
+            field[i][18] = 1
+            field[i][19] = 1
+
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+            field[i][25] = 1
+        }
+        { i=10
+            field[i][0] = 1
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+
+            field[i][6] = 1
+            field[i][7] = 1
+
+            field[i][12] = 1
+            field[i][13] = 1
+
+            field[i][18] = 1
+            field[i][19] = 1
+
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+            field[i][25] = 1
+        }
+        { i=11
+            field[i][0] = 1
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+
+            field[i][6] = 1
+            field[i][7] = 1
+
+            field[i][9] = 1
+            field[i][10] = 1
+            field[i][11] = 1
+            field[i][12] = 1
+            field[i][13] = 1
+            field[i][14] = 1
+            field[i][15] = 1
+            field[i][16] = 1
+
+            field[i][18] = 1
+            field[i][19] = 1
+
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+            field[i][25] = 1
+        }
+        { i=12
+            field[i][0] = 1
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+
+            field[i][6] = 1
+            field[i][7] = 1
+
+            field[i][9] = 1
+            field[i][10] = 1
+            field[i][11] = 1
+            field[i][12] = 1
+            field[i][13] = 1
+            field[i][14] = 1
+            field[i][15] = 1
+            field[i][16] = 1
+
+            field[i][18] = 1
+            field[i][19] = 1
+
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+            field[i][25] = 1
+        }
+        { i=13
+            field[i][9] = 1
+            field[i][10] = 1
+            field[i][11] = 1
+            field[i][12] = 1
+            field[i][13] = 1
+            field[i][14] = 1
+            field[i][15] = 1
+            field[i][16] = 1
+        }
+        { i=14
+            field[i][0] = 1
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+
+            field[i][6] = 1
+            field[i][7] = 1
+
+            field[i][9] = 1
+            field[i][10] = 1
+            field[i][11] = 1
+            field[i][12] = 1
+            field[i][13] = 1
+            field[i][14] = 1
+            field[i][15] = 1
+            field[i][16] = 1
+
+            field[i][18] = 1
+            field[i][19] = 1
+
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+            field[i][25] = 1
+        }
+        { i=15
+            field[i][0] = 1
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+
+            field[i][6] = 1
+            field[i][7] = 1
+
+            field[i][9] = 1
+            field[i][10] = 1
+            field[i][11] = 1
+            field[i][12] = 1
+            field[i][13] = 1
+            field[i][14] = 1
+            field[i][15] = 1
+            field[i][16] = 1
+
+            field[i][18] = 1
+            field[i][19] = 1
+
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+            field[i][25] = 1
+        }
+        { i=16
+            field[i][0] = 1
+            field[i][1] = 1
+            field[i][2] = 1
+            field[i][3] = 1
+            field[i][4] = 1
+
+            field[i][6] = 1
+            field[i][7] = 1
+
+            field[i][18] = 1
+            field[i][19] = 1
+
+            field[i][21] = 1
+            field[i][22] = 1
+            field[i][23] = 1
+            field[i][24] = 1
+            field[i][25] = 1
         }
 
         return field;
