@@ -3,7 +3,7 @@ const COL_NUM = 25;
 const ROW_NUM = 30;
 const GAME_DELAY = 500;
 const MIN_DELAY = 250;
-const DEFAULT_COLOR = 'white';
+const DEFAULT_COLOR = '#000000';
 const FIGURE_MAX_SIZE = 4;
 const DIRECTIONS = {
     left: {x: -1, y: 0},
@@ -132,7 +132,9 @@ class Game {
             for (let j = 0; j < COL_NUM; j++) {
                 let color = (this.playingField[i][j] > 0) ?
                     colors[this.playingField[i][j] - 1] : DEFAULT_COLOR;
-                drawSquare(j, i, color, context);
+                let bordercolor = (this.playingField[i][j] > 0) ?
+                    '#46bfee' : 'white';
+                drawSquare(j, i, color, context, bordercolor);
             }
         }
     }

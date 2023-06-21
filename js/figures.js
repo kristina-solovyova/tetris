@@ -26,7 +26,9 @@ const P = [[1]];
 const yellow = "#faf32f";
 
 const topologies = {Z, S, J, T, L, I, O, P};
-const colors = ["#e74c3c", "#ffa726", "#ffee58", "#58d68d", "#93f3ef", "#3498db", "#9b59b6"];
+const colors = ["#46bfee"];
+// const colors = ["#e74c3c", "#ffa726", "#ffee58", "#58d68d", "#93f3ef", "#3498db", "#9b59b6"];
+const tetraminos = assignColorsToTopologies();
 
 class Figure {
     constructor(playingField, figureContext, isNext) {
@@ -36,7 +38,7 @@ class Figure {
         this.color = yellow;
         this.direction = DIRECTIONS.stop;
         this.x
-        this.y 
+        this.y
 
         if (isNext === true) {
             this.makeNext();
@@ -144,10 +146,10 @@ class Figure {
     }
 }
 
-function drawSquare(x, y, color, context) {
+function drawSquare(x, y, color, context, bordercolor = "white") {
     context.fillStyle = color;
     context.fillRect(x*SQUARE_SIZE,y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE);
-    context.strokeStyle = "black";
+    context.strokeStyle = bordercolor;
     context.strokeRect(x*SQUARE_SIZE,y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE);
 }
 
