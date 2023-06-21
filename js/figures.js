@@ -27,7 +27,6 @@ const yellow = "#faf32f";
 
 const topologies = {Z, S, J, T, L, I, O, P};
 const colors = ["#e74c3c", "#ffa726", "#ffee58", "#58d68d", "#93f3ef", "#3498db", "#9b59b6"];
-const tetraminos = assignColorsToTopologies();
 
 class Figure {
     constructor(playingField, figureContext, isNext) {
@@ -122,7 +121,6 @@ class Figure {
     adjustRotation() {
         let newTopology = rotateFigure(this.topology);
         if (this.checkFieldLimitations(null, newTopology)) {
-            //TODO: wall kicks
             this.topology = newTopology;
         }
     }
@@ -134,12 +132,6 @@ class Figure {
             }
         }
     }
-
-    // generateRandom() {
-    //     let tetramino = getRandomTetramino();
-    //     this.topology = tetramino.topology;
-    //     this.color = tetramino.color;
-    // }
 
     makeCurrent() {
         this.x = 3;
@@ -159,29 +151,16 @@ function drawSquare(x, y, color, context) {
     context.strokeRect(x*SQUARE_SIZE,y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE);
 }
 
-function assignColorsToTopologies() {
-    let tetraminos = {};
-    Object.keys(topologies).forEach((key, ind) => {
-        tetraminos[key] = {
-            topology: topologies[key],
-            color: colors[ind]
-        };
-    });
 
-    return tetraminos;
+class Pacman extends Figure {
+    constructor(playingField, figureContext, isNext) {
+        super(playingField, figureContext, isNext);
+        this.powered_up = false;
+        this.lives = 3;
+      }
+
+
+      power_up() {
+        return this.present() + ', it is a ' + this.model;
+      }
 }
-
-function getRandomTetramino() {
-    let keys = Object.keys(tetraminos);
-    let key = keys[Math.floor(Math.random()*keys.length)];
-
-    return tetraminos[key];
-}
-
-function rotateFigure(figure) {
-    figure = [...figure].reverse();
-    return figure[0].map((column, index) => (
-        figure.map(row => row[index])
-    ));
-}
-

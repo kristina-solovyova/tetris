@@ -19,6 +19,11 @@ const ACTIONS = {
     up: 'ArrowUp'
 };
 
+const EMPTY = 0;
+const WALL = 1;
+const FOOD = 2;
+const POWER_UP = 3;
+
 const canvas = document.getElementById('main_field');
 const context = canvas.getContext('2d');
 const nextFigureCanvas = document.getElementById('next_figure');
@@ -33,10 +38,9 @@ class Game {
 
     init() {
         this.drawPlayingField();
-        //this.drawNextFigureField();
         this.currentFigure.draw();
         //this.nextFigure.draw();
-        this.score.displayRecords();
+        // this.score.displayRecords();
         this.delay = GAME_DELAY;
     }
 
@@ -67,8 +71,6 @@ class Game {
 
         if (this.isOver()) {
             this.stop();
-        } else {
-            //this.updateFigures();
         }
     }
 
@@ -121,7 +123,7 @@ class Game {
 
     eraseRow(rowNum) {
         this.playingField.splice(rowNum, 1);
-        this.playingField.unshift(new Array(COL_NUM).fill(0));
+        this.playingField.unshift(new Array(COL_NUM).fill(EMPTY));
         this.drawPlayingField();
     }
 
@@ -158,15 +160,7 @@ class Game {
 
         return field;
     }
-/*
-    drawNextFigureField() {
-        for (let i = 0; i < FIGURE_MAX_SIZE; i++) {
-            for (let j = 0; j < FIGURE_MAX_SIZE; j++) {
-                drawSquare(j, i, DEFAULT_COLOR, nextFigureContext)
-            }
-        }
-    }
-*/
+
     handleKeydown(event) {
         if (Object.values(ACTIONS).includes(event.key)) {
             event.preventDefault();
