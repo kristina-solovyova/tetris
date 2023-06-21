@@ -34,6 +34,10 @@ class Game {
         this.playingField = Game.generatePlayingField();
         this.currentFigure = new Figure(this.playingField, context);
         this.score = new Score(username);
+        this.ghostFigure1 = new Figure(this.playingField, context, true);
+        this.ghostFigure2 = new Figure(this.playingField, context, true);
+        this.ghostFigure3 = new Figure(this.playingField, context, true);
+        this.ghostFigure4 = new Figure(this.playingField, context, true);
     }
 
     init() {
@@ -59,10 +63,18 @@ class Game {
     }
 
     moveOn() {
-        let isMoved = this.currentFigure.move(this.currentFigure.directions);
+        let isMoved = this.currentFigure.move();
+        this.ghostFigure1.move();
+        this.ghostFigure2.move();
+        this.ghostFigure3.move();
+        this.ghostFigure4.move();
+
+
+
         if (!isMoved) {
             this.nextStep();
         }
+
     }
 
     nextStep() {

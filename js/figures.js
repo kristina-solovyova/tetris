@@ -24,6 +24,7 @@ const O = [[0, 0, 0, 0],
 const P = [[1]];
 
 const yellow = "#faf32f";
+const red = "#f44336";
 
 const topologies = {Z, S, J, T, L, I, O, P};
 const colors = ["#46bfee"];
@@ -31,16 +32,17 @@ const colors = ["#46bfee"];
 const tetraminos = assignColorsToTopologies();
 
 class Figure {
-    constructor(playingField, figureContext, isNext) {
+    constructor(playingField, figureContext, isGohst) {
         this.playingField = playingField;
         this.context = (figureContext == null) ? context : figureContext;
         this.topology = P;
-        this.color = yellow;
-        this.direction = DIRECTIONS.stop;
+        this.color = (isGohst) ? red : yellow;
+        this.direction = (isGohst) ? DIRECTIONS.random : DIRECTIONS.stop;
         this.x
         this.y
+        this.isGohst = isGohst;
 
-        if (isNext === true) {
+        if (isGohst) {
             this.makeNext();
         } else {
             this.makeCurrent();
@@ -79,7 +81,7 @@ class Figure {
         });
     }
 
-    move(direction) {
+    move(direction = this.direction) {
         if (this.checkFieldLimitations(direction)) {
             this.erase();
             this.x += direction.x;
@@ -108,10 +110,16 @@ class Figure {
                 if (topology[y][x] === 1 &&
                     (newX+x < 0 || newX+x >= this.playingField[0].length
                         || newY+y >= this.playingField.length || newY+y < 0)) {
+                    if (this.isGohst) {
+                        this.direction = this.direction + 1;
+                    }
                     return false;
                 } else if (topology[y][x] === 1 &&
                     this.playingField[newY+y] !== undefined &&
                     this.playingField[newY+y][newX+x] > 0) {
+                    if (this.isGohst) {
+                        this.direction = this.direction + 1;
+                    }
                     return false;
                 }
             }
