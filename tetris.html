@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tetris</title>
+    <title>PAC-MAN</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1 class="title">Tetris</h1>
+    <h1 class="title">PAC-MAN</h1>
     <div class="container">
         <div class="left-menu">
             <canvas id="next_figure" class="field" width="120" height="120">
             </canvas>
-            <h4>Use keyboard to move figures:</h4>
+            <h4>Use keyboard to move PAC-MAN:</h4>
             <div class="tips">
                 <p>⮜ Left</p>
                 <p>⮞ Right</p>
-                <p>⮝ Rotate</p>
+                <p>⮝ Up</p>
                 <p>⮟ Down</p>
             </div>
         </div>
@@ -59,7 +59,7 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
-        
+
         function toHomePage() {
             window.location.href = "index.html";
         }
